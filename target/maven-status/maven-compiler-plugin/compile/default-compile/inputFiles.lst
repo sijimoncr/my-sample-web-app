@@ -1,5 +1,8 @@
-C:\Workshop\java-poc\my-sample-web-app\src\main\java\com\example\webapp\DatabaseManager.java
-C:\Workshop\java-poc\my-sample-web-app\src\main\java\com\example\webapp\WebAppServlet.java
-C:\Workshop\java-poc\my-sample-web-app\src\main\java\com\example\webapp\User.java
-C:\Workshop\java-poc\my-sample-web-app\src\main\java\com\example\webapp\JettyMain.java
-C:\Workshop\java-poc\my-sample-web-app\src\main\java\com\example\webapp\Product.java
+/home/sijimon/workshop/java-poc/my-sample-web-app/src/main/java/com/example/webapp/DatabaseManager.java
+/home/sijimon/workshop/java-poc/my-sample-web-app/src/main/java/com/example/webapp/WebAppServlet.java
+/home/sijimon/workshop/java-poc/my-sample-web-app/src/main/java/com/example/webapp/TemplateHelper.java
+/home/sijimon/workshop/java-poc/my-sample-web-app/src/main/java/com/example/webapp/SimpleServer.java
+/home/sijimon/workshop/java-poc/my-sample-web-app/src/main/java/com/example/webapp/User.java
+/home/sijimon/workshop/java-poc/my-sample-web-app/src/main/java/com/example/webapp/TestServlet.java
+/home/sijimon/workshop/java-poc/my-sample-web-app/src/main/java/com/example/webapp/TomcatMain.java
+/home/sijimon/workshop/java-poc/my-sample-web-app/src/main/java/com/example/webapp/Product.java

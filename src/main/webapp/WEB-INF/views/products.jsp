@@ -9,7 +9,7 @@
 </head>
 <body>
     <nav class="navbar">
-        <h1>Sample Web App (Jakarta EE 10)</h1>
+        <h1>Sample Web App (Jakarta EE 10 + Tomcat)</h1>
         <div class="nav-links">
             <a href="${pageContext.request.contextPath}/">Home</a>
             <a href="${pageContext.request.contextPath}/users">Users</a>
@@ -19,17 +19,36 @@
     </nav>
     
     <div class="container">
-        <h1>Products</h1>
-        <div class="products-grid">
-            <c:forEach var="product" items="${products}">
-                <div class="product-card">
-                    <h3>${product.name}</h3>
-                    <div class="price">$<fmt:formatNumber value="${product.price}" pattern="0.00"/></div>
-                    <p>${product.description}</p>
-                    <small>Added: <fmt:formatDate value="${product.createdAt}" pattern="yyyy-MM-dd"/></small>
+        <h1>Product Catalog</h1>
+        
+        <c:choose>
+            <c:when test="${not empty products}">
+                <div class="products-grid">
+                    <c:forEach var="product" items="${products}">
+                        <div class="product-card">
+                            <h3><c:out value="${product.name}"/></h3>
+                            <div class="price">
+                                $<fmt:formatNumber value="${product.price}" pattern="0.00"/>
+                            </div>
+                            <p class="description">
+                                <c:out value="${product.description}"/>
+                            </p>
+                            <small class="created-date">
+                                Added: <fmt:formatDate value="${product.createdAt}" pattern="MMM dd, yyyy"/>
+                            </small>
+                        </div>
+                    </c:forEach>
                 </div>
-            </c:forEach>
-        </div>
+                
+                <p class="summary">Showing ${products.size()} product(s)</p>
+            </c:when>
+            <c:otherwise>
+                <div class="no-data">
+                    <p>No products found in the catalog.</p>
+                </div>
+            </c:otherwise>
+        </c:choose>
+        
         <p><a href="${pageContext.request.contextPath}/">← Back to Home</a></p>
     </div>
 </body>

@@ -12,17 +12,25 @@ import java.util.List;
 @WebServlet(urlPatterns = {"/", "/home", "/users", "/products", "/about"})
 public class WebAppServlet extends HttpServlet {
     
-    @Override
-    public void init() throws ServletException {
-        super.init();
-        DatabaseManager.initializeDatabase();
-        System.out.println("Database initialized successfully!");
-    }
+	@Override
+	public void init() throws ServletException {
+	    super.init();
+	    System.out.println("*** WebAppServlet INIT called ***");
+	    try {
+	        DatabaseManager.initializeDatabase();
+	        System.out.println("*** Database initialized successfully! ***");
+	    } catch (Exception e) {
+	        System.err.println("*** Database initialization failed ***");
+	        e.printStackTrace();
+	        throw new ServletException("Database initialization failed", e);
+	    }
+	}
+
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        
+    	 System.out.println("*** WebAppServlet doGet called for path: " + request.getServletPath() + " ***");
         String path = request.getServletPath();
         
         try {
@@ -48,48 +56,43 @@ public class WebAppServlet extends HttpServlet {
         }
     }
     
+    
     private void showHomePage(HttpServletRequest request, HttpServletResponse response) 
             throws IOException, SQLException, ServletException {
         
         List<User> users = DatabaseManager.getAllUsers();
         List<Product> products = DatabaseManager.getAllProducts();
         
-        // Set attributes for JSP
         request.setAttribute("userCount", users.size());
         request.setAttribute("productCount", products.size());
         
-        // Forward to JSP
         request.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(request, response);
     }
-    
+
     private void showUsersPage(HttpServletRequest request, HttpServletResponse response) 
             throws IOException, SQLException, ServletException {
         
         List<User> users = DatabaseManager.getAllUsers();
-        
-        // Set attributes for JSP
         request.setAttribute("users", users);
         
-        // Forward to JSP
         request.getRequestDispatcher("/WEB-INF/views/users.jsp").forward(request, response);
     }
-    
+
     private void showProductsPage(HttpServletRequest request, HttpServletResponse response) 
             throws IOException, SQLException, ServletException {
         
         List<Product> products = DatabaseManager.getAllProducts();
-        
-        // Set attributes for JSP
         request.setAttribute("products", products);
         
-        // Forward to JSP
         request.getRequestDispatcher("/WEB-INF/views/products.jsp").forward(request, response);
     }
-    
+
     private void showAboutPage(HttpServletRequest request, HttpServletResponse response) 
             throws IOException, ServletException {
         
-        // Forward to JSP (no data needed)
         request.getRequestDispatcher("/WEB-INF/views/about.jsp").forward(request, response);
     }
+
+    
+    
 }

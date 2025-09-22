@@ -8,7 +8,7 @@
 </head>
 <body>
     <nav class="navbar">
-        <h1>Sample Web App (Jakarta EE 10)</h1>
+        <h1>Sample Web App (Jakarta EE 10 + Tomcat)</h1>
         <div class="nav-links">
             <a href="${pageContext.request.contextPath}/" class="active">Home</a>
             <a href="${pageContext.request.contextPath}/users">Users</a>
@@ -19,7 +19,7 @@
     
     <div class="container">
         <h1>Welcome to Jakarta EE 10 Web App</h1>
-        <p>A modern Java web application running on Jetty 12 with SQLite database</p>
+        <p>A modern Java web application running on Tomcat 11 with SQLite database</p>
         
         <div class="stats">
             <div class="stat-card">
@@ -33,6 +33,16 @@
                 <div class="number">${productCount}</div>
                 <a href="${pageContext.request.contextPath}/products">View Products</a>
             </div>
+        </div>
+        
+        <div class="tech-stack">
+            <h2>Technology Stack</h2>
+            <ul>
+                <li><strong>Java 21</strong> with Jakarta EE 10</li>
+                <li><strong>Apache Tomcat 11</strong> with JSP/JSTL support</li>
+                <li><strong>SQLite</strong> database</li>
+                <li><strong>Maven</strong> build system</li>
+            </ul>
         </div>
     </div>
 </body>

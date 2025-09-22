@@ -11,17 +11,15 @@
     <packaging>war</packaging>
     <name>Sample Web App</name>
     
- <properties>
-    <maven.compiler.source>21</maven.compiler.source>
-    <maven.compiler.target>21</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <jetty.version>12.0.8</jetty.version>
-    <jakarta.servlet.version>6.0.0</jakarta.servlet.version>
-    <jakarta.jsp.version>4.0.0</jakarta.jsp.version>
-    <jakarta.jstl.version>3.0.1</jakarta.jstl.version>
-</properties>
-
-<dependencies>
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <tomcat.version>11.0.0</tomcat.version>
+        <jakarta.servlet.version>6.0.0</jakarta.servlet.version>
+    </properties>
+    
+  <dependencies>
     <!-- Jakarta Servlet API -->
     <dependency>
         <groupId>jakarta.servlet</groupId>
@@ -30,27 +28,19 @@
         <scope>provided</scope>
     </dependency>
     
-    <!-- Jakarta JSP API - REQUIRED for PageContext -->
+    <!-- Jakarta JSP API -->
     <dependency>
         <groupId>jakarta.servlet.jsp</groupId>
         <artifactId>jakarta.servlet.jsp-api</artifactId>
-        <version>${jakarta.jsp.version}</version>
+        <version>4.0.0</version>
         <scope>provided</scope>
     </dependency>
     
-    <!-- Jakarta EL API -->
-    <dependency>
-        <groupId>jakarta.el</groupId>
-        <artifactId>jakarta.el-api</artifactId>
-        <version>5.0.1</version>
-        <scope>provided</scope>
-    </dependency>
-    
-    <!-- Jakarta JSTL Implementation -->
+    <!-- Jakarta JSTL -->
     <dependency>
         <groupId>org.glassfish.web</groupId>
         <artifactId>jakarta.servlet.jsp.jstl</artifactId>
-        <version>${jakarta.jstl.version}</version>
+        <version>3.0.1</version>
     </dependency>
     
     <!-- SQLite -->
@@ -60,42 +50,32 @@
         <version>3.42.0.0</version>
     </dependency>
     
-    <!-- Jetty 12 Core -->
+    <!-- Embedded Tomcat - ALL required JARs -->
     <dependency>
-        <groupId>org.eclipse.jetty</groupId>
-        <artifactId>jetty-server</artifactId>
-        <version>${jetty.version}</version>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-core</artifactId>
+        <version>${tomcat.version}</version>
     </dependency>
     
-    <!-- Jetty 12 EE10 WebApp -->
     <dependency>
-        <groupId>org.eclipse.jetty.ee10</groupId>
-        <artifactId>jetty-ee10-webapp</artifactId>
-        <version>${jetty.version}</version>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-jasper</artifactId>
+        <version>${tomcat.version}</version>
     </dependency>
     
-    <!-- Jetty 12 EE10 Servlet -->
     <dependency>
-        <groupId>org.eclipse.jetty.ee10</groupId>
-        <artifactId>jetty-ee10-servlet</artifactId>
-        <version>${jetty.version}</version>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-el</artifactId>
+        <version>${tomcat.version}</version>
     </dependency>
     
-    <!-- Jetty 12 EE10 Annotations -->
+    <!-- Additional required for JSP compilation -->
     <dependency>
-        <groupId>org.eclipse.jetty.ee10</groupId>
-        <artifactId>jetty-ee10-annotations</artifactId>
-        <version>${jetty.version}</version>
+        <groupId>org.eclipse.jdt</groupId>
+        <artifactId>ecj</artifactId>
+        <version>3.33.0</version>
     </dependency>
-    
-    <!-- JSP Implementation -->
-    <dependency>
-        <groupId>org.eclipse.jetty.ee10</groupId>
-        <artifactId>jetty-ee10-apache-jsp</artifactId>
-        <version>${jetty.version}</version>
-    </dependency>
-</dependencies>
-    
+</dependencies>   
     <build>
         <plugins>
             <plugin>
@@ -109,13 +89,11 @@
             </plugin>
             
             <plugin>
-            		<groupId>org.eclipse.jetty.ee10</groupId>  
-            		<artifactId>jetty-ee10-maven-plugin</artifactId>
-                <version>${jetty.version}</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
                 <configuration>
-                    <httpConnector>
-                        <port>8080</port>
-                    </httpConnector>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
         </plugins>
